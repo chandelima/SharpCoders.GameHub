@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using TicTacToe.Models.Enums;
-using TicTacToe.Service;
+﻿using GameHub.Model.Enum;
+using GameHub.Service;
+using System.Windows;
 
-namespace TicTacToe.GUI
+namespace GameHub.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

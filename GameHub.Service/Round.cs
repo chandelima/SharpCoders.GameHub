@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Numerics;
-using TicTacToe.Models;
-using TicTacToe.Models.Enums;
+﻿using GameHub.Model;
+using GameHub.Model.Enum;
 
-namespace TicTacToe.Service
+namespace GameHub.Service
 {
     public class Round
     {
@@ -33,7 +29,7 @@ namespace TicTacToe.Service
             players.Add(Player2);
         }
 
-        internal MoveResult Move(int column, int row)
+        public MoveResult Move(int column, int row)
         {
             grid[column, row] = CurrentRoundSymbol;
             Moves++;

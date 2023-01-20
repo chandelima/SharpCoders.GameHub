@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GameHub.Model;
+using GameHub.Model.Enum;
+using GameHub.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -7,11 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
 using System.Windows.Shapes;
-using TicTacToe.Models;
-using TicTacToe.Models.Enums;
-using TicTacToe.Service;
 
-namespace TicTacToe.GUI
+namespace GameHub.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -90,7 +90,7 @@ namespace TicTacToe.GUI
         private void SetButtonImage(Button btn)
         {
             string imageAsset = round.CurrentRoundSymbol == enumPlayer.O ?
-                "GUI/Assets/btnO.png" : "GUI/Assets/btnX.png";
+                "Assets/btnO.png" : "Assets/btnX.png";
 
             Uri resource = new Uri(imageAsset, UriKind.Relative);
             StreamResourceInfo streamInfo = Application.GetResourceStream(resource);
