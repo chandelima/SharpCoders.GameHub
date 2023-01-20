@@ -12,7 +12,7 @@ namespace TicTacToe.GUI
         public MainWindow()
         {
             InitializeComponent();
-            _ = txtPlayer1.Focus();
+            txtPlayer1.Focus();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
