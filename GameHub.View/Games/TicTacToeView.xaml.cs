@@ -1,6 +1,7 @@
 ﻿using GameHub.Model;
-using GameHub.Model.Enum;
-using GameHub.Service;
+using GameHub.Model.TicTacToe;
+using GameHub.Model.TicTacToe.Enum;
+using GameHub.Service.TicTacToe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +17,16 @@ namespace GameHub.View
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class GameGUI : Window
+    public partial class TicTacToeView : Window
     {
-        Round round;
+        TicTacToeRound round;
+        enumTicTacToePlayer nextPlayer;
         List<Button> buttons;
-        enumPlayer nextPlayer;
-        List<Player> playerList = new List<Player>();
-        List<Line> linesList = new List<Line>();
+        Player Player1;
+        Player Player2;
+        List<Line> linesList;
 
-        public GameGUI(Round round)
+        public TicTacToeView(TicTacToeRound round)
         {
             InitializeComponent();
             this.round = round;
@@ -43,8 +45,9 @@ namespace GameHub.View
                 winLineT0, winLineT1
             };
 
-            playerList.Add(round.Player1);
-            playerList.Add(round.Player2);
+            Player1 = round.Player1;
+            Player2 = round.Player2;
+            
             SetPlayer(round.CurrentRoundSymbol);
         }
 
@@ -57,40 +60,46 @@ namespace GameHub.View
 
             SetButtonImage(btn);
 
-            string[] movePositionString = btn.Tag.ToString().Split(',');
-            int[] movePosition = movePositionString
-                .Select(int.Parse).ToArray();
+            string[] movePositionString = btn.Tag.ToString()!.Split(',');
+            int[] movePosition = movePositionString.Select(int.Parse).ToArray();
 
-            MoveResult moveResult = round.Move(movePosition[0], movePosition[1]);
+            TicTacToeMoveResult moveResult = round.Move(movePosition[0], movePosition[1]);
             if (moveResult.EndRound == false)
             {
                 SetPlayer(moveResult.NextPlayer);
                 return;
             }
-
-            else if (round.WinStatus == enumRoundStatus.Draw)
+            else if (round.WinStatus == enumTicTacToeRoundStatus.Draw)
+            {
                 MessageBox.Show($"Deu velha! :/\n\nFim da partida sem vencedor.");
+            }
             else
             {
                 ShowWinLine(round.WinStatus);
-                MessageBox.Show($"Fim da partida.\nVencedor: {round.WinnerPlayer.Name}");
+                MessageBox.Show($"Fim da partida.\nVencedor: {round.WinnerPlayer!.Name}");
             }
 
             DisableButtons();
         }
 
-        private void SetPlayer(enumPlayer nextPlayer)
+        private void SetPlayer(enumTicTacToePlayer nextPlayer)
         {
             this.nextPlayer = nextPlayer;
 
-            Player player = playerList.FirstOrDefault(p => p.EnumPlayer == nextPlayer);
-            lblPlayerName.Content = player.Name;
+            if(nextPlayer == enumTicTacToePlayer.O)
+                lblPlayerName.Content = Player1.Name;
+            else
+                lblPlayerName.Content = Player2.Name;
         }
 
         private void SetButtonImage(Button btn)
         {
-            string imageAsset = round.CurrentRoundSymbol == enumPlayer.O ?
-                "Assets/btnO.png" : "Assets/btnX.png";
+            string imageAsset;
+
+            if (round.CurrentRoundSymbol == enumTicTacToePlayer.O)
+                imageAsset = "Assets/TicTacToe/btnO.png";
+            else
+                imageAsset = "Assets/TicTacToe/btnX.png";
 
             Uri resource = new Uri(imageAsset, UriKind.Relative);
             StreamResourceInfo streamInfo = Application.GetResourceStream(resource);
@@ -103,10 +112,7 @@ namespace GameHub.View
 
         private void NewRound(object sender, RoutedEventArgs e)
         {
-            Round newRound = new Round(
-                round.Player1.Name, 
-                round.Player2.Name, 
-                enumPlayer.O);
+            TicTacToeRound newRound = new TicTacToeRound(round.Player1, round.Player2);
 
             round = newRound;
             
@@ -119,32 +125,32 @@ namespace GameHub.View
             HideWinLines();
         }
 
-        private void ShowWinLine(enumRoundStatus winType)
+        private void ShowWinLine(enumTicTacToeRoundStatus winType)
         {
             switch (winType)
             {
-                case enumRoundStatus.Horizontal0:
+                case enumTicTacToeRoundStatus.Horizontal0:
                     winLineH0.Visibility = Visibility.Visible;
                     break;
-                case enumRoundStatus.Horizontal1:
+                case enumTicTacToeRoundStatus.Horizontal1:
                     winLineH1.Visibility = Visibility.Visible;
                     break;
-                case enumRoundStatus.Horizontal2:
+                case enumTicTacToeRoundStatus.Horizontal2:
                     winLineH2.Visibility = Visibility.Visible;
                     break;
-                case enumRoundStatus.Vertical0:
+                case enumTicTacToeRoundStatus.Vertical0:
                     winLineV0.Visibility = Visibility.Visible;
                     break;
-                case enumRoundStatus.Vertical1:
+                case enumTicTacToeRoundStatus.Vertical1:
                     winLineV1.Visibility = Visibility.Visible;
                     break;
-                case enumRoundStatus.Vertical2:
+                case enumTicTacToeRoundStatus.Vertical2:
                     winLineV2.Visibility = Visibility.Visible;
                     break;
-                case enumRoundStatus.Transversal0:
+                case enumTicTacToeRoundStatus.Transversal0:
                     winLineT0.Visibility = Visibility.Visible;
                     break;
-                case enumRoundStatus.Transversal1:
+                case enumTicTacToeRoundStatus.Transversal1:
                     winLineT1.Visibility = Visibility.Visible;
                     break;
             }

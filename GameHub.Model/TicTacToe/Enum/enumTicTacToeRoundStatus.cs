@@ -1,8 +1,8 @@
-﻿namespace GameHub.Model.Enum
+﻿namespace GameHub.Model.TicTacToe.Enum
 {
-    public enum enumRoundStatus
+    public enum enumTicTacToeRoundStatus
     {
-        Undefined,
+        None,
         Draw,
         Horizontal0,
         Horizontal1,

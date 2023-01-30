@@ -8,13 +8,62 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Battleship\BigFront.png" />
+    <None Remove="Assets\Battleship\BigFrontH.png" />
+    <None Remove="Assets\Battleship\BigFrontV.png" />
+    <None Remove="Assets\Battleship\BigMiddle.png" />
+    <None Remove="Assets\Battleship\BigMiddleH.png" />
+    <None Remove="Assets\Battleship\BigMiddleV.png" />
+    <None Remove="Assets\Battleship\BigRear.png" />
+    <None Remove="Assets\Battleship\BigRearH.png" />
+    <None Remove="Assets\Battleship\BigRearV.png" />
+    <None Remove="Assets\Battleship\Small.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GameHub.Model\GameHub.Model.csproj" />
     <ProjectReference Include="..\GameHub.Service\GameHub.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\btnO.png" />
-    <Resource Include="Assets\btnX.png" />
+    <Resource Include="Assets\Battleship\BigFrontH.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Battleship\BigFrontV.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Battleship\BigMiddleH.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Battleship\BigMiddleV.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Battleship\BigRearH.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Battleship\BigRearV.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Battleship\Small.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\TicTacToe\btnO.png" />
+    <Resource Include="Assets\TicTacToe\btnX.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="RankingView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="RegisterUserView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="NewGameView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LoginView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

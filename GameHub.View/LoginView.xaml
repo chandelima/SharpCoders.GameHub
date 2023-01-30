@@ -1,11 +1,11 @@
-﻿<Window x:Class="GameHub.View.MainWindow"
+﻿<Window x:Class="GameHub.View.LoginView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameHub.View"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="400" MinWidth="500" MaxHeight="400" MaxWidth="500" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="390" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -19,10 +19,12 @@
         <SolidColorBrush x:Key="Button.Static.Background" Color="#444"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
         <SolidColorBrush x:Key="Button.Static.Foreground" Color="#EEE"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#DDD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#DDD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Text" Color="#333"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#444"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.Pressed.Text" Color="#DDD"/>
         <SolidColorBrush x:Key="Button.Disabled.Background" Color="#888"/>
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#EEE"/>
@@ -51,10 +53,12 @@
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="{StaticResource Button.MouseOver.Text}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="{StaticResource Button.Pressed.Text}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
@@ -67,16 +71,16 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid VerticalAlignment="Top">
-        <Button x:Name="btnStartRound" Style="{DynamicResource RoundedButtonStyle}" IsEnabled="False" Content="Iniciar partida" HorizontalAlignment="Center" Height="45" Margin="0,257,0,0" VerticalAlignment="Top" Width="324" Click="Button_Click"/>
-        <Grid HorizontalAlignment="Center" Height="48" Margin="0,115,0,0" VerticalAlignment="Top">
-            <TextBox x:Name="txtPlayer1" HorizontalAlignment="Left" Margin="0,24,0,0" TextWrapping="Wrap" FontFamily="Consolas" FontSize="18" FontWeight="Heavy" VerticalAlignment="Top" Height="24" Width="374" Background="#FFEDEDED" BorderBrush="Transparent" TextChanged="CheckPlayersAreFilled"/>
-            <Label Content="Player 1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    <Grid VerticalAlignment="Top" Height="380">
+        <Grid HorizontalAlignment="Center" Height="50" Margin="0,115,0,0" VerticalAlignment="Top">
+            <Label Content="Usuário:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtUser" HorizontalAlignment="Left" Margin="0,26,0,0" TextWrapping="Wrap" FontFamily="Consolas" FontSize="18" FontWeight="Heavy" VerticalAlignment="Top" Height="24" Width="374" Background="#FFEDEDED" BorderBrush="Transparent" TextChanged="CheckInputsFilled"/>
         </Grid>
-        <Grid HorizontalAlignment="Center" Height="50" Margin="0,182,0,0" VerticalAlignment="Top">
-            <TextBox x:Name="txtPlayer2" HorizontalAlignment="Left" Margin="0,26,0,0" TextWrapping="Wrap" FontFamily="Consolas" FontSize="18" FontWeight="Heavy" VerticalAlignment="Top" Height="24" Width="374" Background="#FFEDEDED" BorderBrush="Transparent" TextChanged="CheckPlayersAreFilled"/>
-            <Label Content="Player 2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
+        <Grid HorizontalAlignment="Center" Height="48" Margin="0,182,0,0" VerticalAlignment="Top">
+            <Label Content="Senha:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="0,24,0,0" FontFamily="Consolas" FontSize="18" FontWeight="Heavy" VerticalAlignment="Top" Height="24" Width="374" Background="#FFEDEDED" BorderBrush="Transparent" PasswordChanged="CheckInputsFilled"/>
         </Grid>
+        <Label Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Consolas" FontSize="48" Margin="0,25,0,0"/>
+        <Button x:Name="btnLogin" Style="{DynamicResource RoundedButtonStyle}" IsEnabled="False" Content="Fazer Login" HorizontalAlignment="Center" Height="45" Margin="0,282,0,0" VerticalAlignment="Top" Width="180" Click="ButtonLogin_Click"/>
     </Grid>
 </Window>
